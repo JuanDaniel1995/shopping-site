@@ -18,14 +18,13 @@ import "./App.css";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
-  unsubscribeFromSnapshot = null;
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
-        this.unsubscribeFromSnapshot = userRef.onSnapshot(snapShot => {
+        userRef.get().then(snapShot => {
           setCurrentUser({
             id: snapShot.id,
             ...snapShot.data()
@@ -39,7 +38,6 @@ class App extends React.Component {
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
-    this.unsubscribeFromSnapshot();
   }
 
   render() {
