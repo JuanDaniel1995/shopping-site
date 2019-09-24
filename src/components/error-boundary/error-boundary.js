@@ -21,9 +21,9 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasErrored) {
       return (
-        <div className="image-overlay">
-          <div className="image-container" />
-          <h2 className="image-text">Sorry this page is broken</h2>
+        <div className="error-image-overlay">
+          <div className="error-image-container" />
+          <h2 className="error-image-text">Sorry this page is broken</h2>
         </div>
       );
     }
